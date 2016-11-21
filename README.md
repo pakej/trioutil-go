@@ -38,3 +38,6 @@ if err != nil {
 2. Commit your changes (`git commit -am 'Some cool reflection'`)  
 3. Push to the branch (`git push origin new-feature`)  
 4. Create new Pull Request
+
+# License #
+MIT
