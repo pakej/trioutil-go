@@ -1,3 +1,6 @@
+/*
+Package TrioUtil is a client for TrioMobile (http://trio-mobile.com) that utilises TrioMobile's API.
+*/
 package TrioUtil
 
 import (
@@ -6,8 +9,44 @@ import (
 	"strings"
 )
 
-// returns the endpoint after parsing the phone and message parameters
-func getEndpoint(phone string, message string) string {
+// Trio represents the Trio Instance
+type Trio struct {
+	token  string
+	params url.Values
+}
+
+// New - creates a new instance of Trio
+func New(token string) *Trio {
+	params := url.Values{}
+	params.Set("api_key", token)
+	params.Set("action", "send")
+	params.Set("sender_id", "CLOUDSMS")
+	params.Set("content_type", "1")
+	params.Set("mode", "shortcode")
+
+	return &Trio{
+		token,
+		params,
+	}
+}
+
+// SendSms - send SMS to TRIO service provider
+func (t *Trio) SendSms(phone string, message string) (*http.Response, error) {
+	// gets all the predefined url parameters
+	url_parameters := t.params
+	// set SendSms func specific url parameters
+	url_parameters.Set("to", phone)
+	url_parameters.Set("msg", message)
+	// parse the url parameters into an endpoint
+	endpoint := getEndpoint(url_parameters)
+	// sends the POST request to TrioMobile
+	resp, err := http.Post(endpoint, "", nil)
+
+	return resp, err
+}
+
+// returns the endpoint after parsing url parameters
+func getEndpoint(url_parameters url.Values) string {
 	var Url *url.URL
 	Url, err := url.Parse("http://cloudsms.trio-mobile.com/index.php/api/bulk_mt?")
 
@@ -15,26 +54,11 @@ func getEndpoint(phone string, message string) string {
 		return ""
 	}
 
-	parameters := url.Values{}
-	parameters.Add("api_key", "my-api-key")
-	parameters.Add("action", "send")
-	parameters.Add("to", phone)
-	parameters.Add("msg", message)
-	parameters.Add("sender_id", "CLOUDSMS")
-	parameters.Add("content_type", "1")
-	parameters.Add("mode", "shortcode")
+	parameters := url_parameters
 	Url.RawQuery = parameters.Encode()
 
 	// replaces all occurences of '+' to '%20' since the encoder
 	// encodes spaces to '+' instead of '%20'
 	str := strings.Replace(Url.String(), "+", "%20", -1)
 	return str
-}
-
-// SendSms - send SMS to TRIO service provider
-func SendSms(phone string, message string) (*http.Response, error) {
-	endpoint := getEndpoint(phone, message)
-	resp, err := http.Post(endpoint, "", nil)
-
-	return resp, err
 }
