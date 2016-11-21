@@ -32,3 +32,9 @@ if err != nil {
 
 // do something with response
 ```
+
+# Making Changes #
+1. Create your feature branch (`git checkout -b new-feature`)  
+2. Commit your changes (`git commit -am 'Some cool reflection'`)  
+3. Push to the branch (`git push origin new-feature`)  
+4. Create new Pull Request
