@@ -1,18 +1,18 @@
-# Description #
+# TrioUtil
 
 TrioUtil is a golang package for use with Trio-Mobile SMS Provider. It's usage is based on Trio-Mobile's API.
 
-# Installation #
+## Installation
 
 ```
-$ go get github.com/zaimramlan/go-trioutil
+$ go get github.com/lambdable/go-trioutil
 ```
 
-# Usage #
+## Usage
 
 Import TrioUtil
 ```
-import "github.com/zaimramlan/go-trioutil"
+import "github.com/lambdable/go-trioutil"
 ```
 
 Create a new trioutil reference
@@ -33,11 +33,11 @@ if err != nil {
 // do something with response
 ```
 
-# Making Changes #
-1. Create your feature branch (`git checkout -b new-feature`)  
-2. Commit your changes (`git commit -am 'Some cool reflection'`)  
-3. Push to the branch (`git push origin new-feature`)  
+## Making Changes
+1. Create your feature branch (`git checkout -b new-feature`)
+2. Commit your changes (`git commit -am 'Some cool reflection'`)
+3. Push to the branch (`git push origin new-feature`)
 4. Create new Pull Request
 
-# License #
+## License
 MIT
