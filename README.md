@@ -5,14 +5,14 @@ TrioUtil is a golang package for use with Trio-Mobile SMS Provider. It's usage i
 ## Installation
 
 ```
-$ go get github.com/lambdable/go-trioutil
+$ go get github.com/pakej/go-trioutil
 ```
 
 ## Usage
 
 Import TrioUtil
 ```
-import "github.com/lambdable/go-trioutil"
+import "github.com/pakej/go-trioutil"
 ```
 
 Create a new trioutil reference
